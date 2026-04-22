@@ -7,221 +7,39 @@
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f3f4f6;
-      color: #1f2937;
-      min-height: 100vh;
-      padding: 16px;
-    }
-
-    .header {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: white;
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 16px;
-      text-align: center;
-    }
-
-    .header h1 {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .header p {
-      font-size: 12px;
-      opacity: 0.85;
-      margin-top: 4px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    }
-
-    .card h2 {
-      font-size: 13px;
-      font-weight: 700;
-      color: #6366f1;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .step-badge {
-      background: #6366f1;
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 11px 16px;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: white;
-    }
-
+    body { font-family: 'Segoe UI', sans-serif; background: #f3f4f6; color: #1f2937; min-height: 100vh; padding: 16px; }
+    .header { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; text-align: center; }
+    .header h1 { font-size: 20px; font-weight: 700; }
+    .header p { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+    .card { background: white; border-radius: 12px; padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+    .card h2 { font-size: 13px; font-weight: 700; color: #6366f1; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .step-badge { background: #6366f1; color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+    .btn { width: 100%; padding: 11px 16px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-primary { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }
     .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-    .btn-success {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: white;
-    }
-
+    .btn-success { background: linear-gradient(135deg, #10b981, #059669); color: white; }
     .btn-success:hover { opacity: 0.9; transform: translateY(-1px); }
     .btn-success:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-    .btn-danger {
-      background: linear-gradient(135deg, #ef4444, #dc2626);
-      color: white;
-    }
-
+    .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
     .btn-danger:hover { opacity: 0.9; }
-
-    .file-input-wrapper {
-      position: relative;
-      margin-top: 10px;
-    }
-
-    .file-input-wrapper input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
-    }
-
-    .file-label {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 11px;
-      border: 2px dashed #c4b5fd;
-      border-radius: 8px;
-      background: #f5f3ff;
-      color: #6366f1;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .file-label:hover {
-      background: #ede9fe;
-      border-color: #8b5cf6;
-    }
-
-    .preview-box {
-      margin-top: 10px;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 2px solid #e5e7eb;
-      display: none;
-    }
-
-    .preview-box img {
-      width: 100%;
-      height: 120px;
-      object-fit: contain;
-      background: #f9fafb;
-    }
-
-    .preview-label {
-      padding: 6px 10px;
-      font-size: 11px;
-      color: #6b7280;
-      background: #f3f4f6;
-      text-align: center;
-    }
-
-    .status-box {
-      border-radius: 8px;
-      padding: 12px;
-      font-size: 13px;
-      margin-top: 4px;
-      display: none;
-    }
-
+    .file-input-wrapper { position: relative; margin-top: 10px; }
+    .file-input-wrapper input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .file-label { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px; border: 2px dashed #c4b5fd; border-radius: 8px; background: #f5f3ff; color: #6366f1; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .file-label:hover { background: #ede9fe; border-color: #8b5cf6; }
+    .preview-box { margin-top: 10px; border-radius: 8px; overflow: hidden; border: 2px solid #e5e7eb; display: none; }
+    .preview-box img { width: 100%; height: 120px; object-fit: contain; background: #f9fafb; }
+    .preview-label { padding: 6px 10px; font-size: 11px; color: #6b7280; background: #f3f4f6; text-align: center; }
+    .status-box { border-radius: 8px; padding: 12px; font-size: 13px; margin-top: 10px; display: none; line-height: 1.5; }
     .status-box.info { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
     .status-box.success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
     .status-box.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
     .status-box.warning { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
-
-    .master-info {
-      display: none;
-      background: #f5f3ff;
-      border: 1px solid #c4b5fd;
-      border-radius: 8px;
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 12px;
-      color: #5b21b6;
-    }
-
+    .master-info { display: none; background: #f5f3ff; border: 1px solid #c4b5fd; border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 12px; color: #5b21b6; }
     .master-info strong { display: block; margin-bottom: 4px; }
-
-    .progress-bar {
-      height: 6px;
-      background: #e5e7eb;
-      border-radius: 99px;
-      overflow: hidden;
-      margin-top: 10px;
-      display: none;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #6366f1, #8b5cf6);
-      border-radius: 99px;
-      transition: width 0.3s ease;
-      width: 0%;
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid #e5e7eb;
-      margin: 4px 0 12px;
-    }
-
-    .tip {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-top: 8px;
-      line-height: 1.5;
-    }
+    .progress-bar { height: 6px; background: #e5e7eb; border-radius: 99px; overflow: hidden; margin-top: 10px; display: none; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 99px; transition: width 0.3s ease; width: 0%; }
+    .tip { font-size: 11px; color: #9ca3af; margin-top: 8px; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -231,24 +49,18 @@
     <p>Replace one image → update all slides instantly</p>
   </div>
 
-  <!-- STEP 1: Tag Master Image -->
   <div class="card">
-    <h2><span class="step-badge">1</span> Select &amp; Tag Master Image</h2>
-    <p style="font-size:12px; color:#6b7280; margin-bottom:10px;">
-      Click on an image in your slide first, then press the button below to tag it as the master.
-    </p>
-    <button class="btn btn-primary" id="btnTag" onclick="tagSelectedImage()">
-      🏷️ Tag Selected Image as Master
-    </button>
+    <h2><span class="step-badge">1</span> Tag Master Image</h2>
+    <p style="font-size:12px; color:#6b7280; margin-bottom:10px;">Click on your image in the slide, then press the button below.</p>
+    <button class="btn btn-primary" id="btnTag" onclick="tagSelectedImage()">🏷️ Tag Selected Image as Master</button>
     <div class="master-info" id="masterInfo">
       <strong>✅ Master image tagged!</strong>
-      Found on: <span id="masterSlideNum">—</span><br/>
-      This image will be replaced across all slides.
+      Shape: <span id="masterShapeName">—</span><br/>
+      Slide: <span id="masterSlideNum">—</span>
     </div>
-    <p class="tip">💡 Tip: Click on the image on your slide first, then click the button above.</p>
+    <p class="tip">💡 Click on your image in the slide first, then press the button.</p>
   </div>
 
-  <!-- STEP 2: Choose new image -->
   <div class="card">
     <h2><span class="step-badge">2</span> Choose Replacement Image</h2>
     <div class="file-input-wrapper">
@@ -261,19 +73,15 @@
     </div>
   </div>
 
-  <!-- STEP 3: Replace -->
   <div class="card">
     <h2><span class="step-badge">3</span> Replace Across All Slides</h2>
-    <button class="btn btn-success" id="btnReplace" onclick="replaceAllImages()" disabled>
-      🔄 Replace on All Slides
-    </button>
+    <button class="btn btn-success" id="btnReplace" onclick="replaceAllImages()" disabled>🔄 Replace on All Slides</button>
     <div class="progress-bar" id="progressBar">
       <div class="progress-fill" id="progressFill"></div>
     </div>
     <div class="status-box" id="statusBox"></div>
   </div>
 
-  <!-- Reset -->
   <div class="card">
     <h2>⚙️ Options</h2>
     <button class="btn btn-danger" onclick="resetAll()">🗑️ Reset / Start Over</button>
@@ -281,11 +89,9 @@
   </div>
 
 <script>
-  // State
-  let masterImageBase64 = null;
+  const MASTER_TAG = '__imagesync_master__';
   let newImageBase64 = null;
-  let masterSlideIndex = null;
-  let masterShapeIndex = null;
+  let masterShapeName = null;
 
   Office.onReady(function(info) {
     if (info.host === Office.HostType.PowerPoint) {
@@ -293,18 +99,19 @@
     }
   });
 
-  // STEP 1: Tag selected image
+  // STEP 1: Tag selected image by renaming it
   async function tagSelectedImage() {
     try {
-      showStatus('info', '🔍 Reading selected image...');
+      showStatus('info', '🔍 Tagging selected image...');
 
       await PowerPoint.run(async (context) => {
+        // Load all slides
         const slides = context.presentation.slides;
         slides.load("items");
         await context.sync();
 
-        // Try to get active slide ID
-        let activeSlideId = null;
+        // Try to find currently selected slide
+        let targetSlideIndex = 0;
         try {
           const selSlides = context.presentation.getSelectedSlides();
           selSlides.load("items");
@@ -312,52 +119,70 @@
           if (selSlides.items.length > 0) {
             selSlides.items[0].load("id");
             await context.sync();
-            activeSlideId = selSlides.items[0].id;
+            const activeId = selSlides.items[0].id;
+            for (let i = 0; i < slides.items.length; i++) {
+              slides.items[i].load("id");
+            }
+            await context.sync();
+            for (let i = 0; i < slides.items.length; i++) {
+              if (slides.items[i].id === activeId) { targetSlideIndex = i; break; }
+            }
           }
-        } catch(e) { /* fallback: scan all slides */ }
+        } catch(e) {}
 
-        let found = false;
+        const slide = slides.items[targetSlideIndex];
+        const shapes = slide.shapes;
+        shapes.load("items");
+        await context.sync();
+
+        for (let sh = 0; sh < shapes.items.length; sh++) {
+          shapes.items[sh].load("shapeType,name");
+        }
+        await context.sync();
+
+        // Find first picture shape
+        let picShape = null;
+        for (let sh = 0; sh < shapes.items.length; sh++) {
+          if (shapes.items[sh].shapeType === PowerPoint.ShapeType.picture) {
+            picShape = shapes.items[sh];
+            break;
+          }
+        }
+
+        if (!picShape) {
+          showStatus('error', '❌ No image found on this slide. Please go to a slide that has an image.');
+          return;
+        }
+
+        // Remove old master tags from all slides first
         for (let s = 0; s < slides.items.length; s++) {
           const sl = slides.items[s];
-          sl.load("id");
+          const sh = sl.shapes;
+          sh.load("items");
           await context.sync();
-
-          if (activeSlideId && sl.id !== activeSlideId) continue;
-
-          const sShapes = sl.shapes;
-          sShapes.load("items");
-          await context.sync();
-
-          for (let sh = 0; sh < sShapes.items.length; sh++) {
-            sShapes.items[sh].load("shapeType,name");
+          for (let i = 0; i < sh.items.length; i++) {
+            sh.items[i].load("name");
           }
           await context.sync();
-
-          for (let sh = 0; sh < sShapes.items.length; sh++) {
-            const shape = sShapes.items[sh];
-            if (shape.shapeType !== PowerPoint.ShapeType.picture) continue;
-            try {
-              const imgEl = shape.image;
-              imgEl.load("base64");
-              await context.sync();
-              if (imgEl.base64) {
-                masterImageBase64 = imgEl.base64;
-                masterSlideIndex = s;
-                masterShapeIndex = sh;
-                document.getElementById('masterInfo').style.display = 'block';
-                document.getElementById('masterSlideNum').textContent = `Slide ${s + 1} — "${shape.name}"`;
-                showStatus('success', `✅ Master image tagged from Slide ${s + 1}! Now choose a replacement image.`);
-                checkEnableReplace();
-                found = true;
-                return;
-              }
-            } catch(imgErr) { continue; }
+          for (let i = 0; i < sh.items.length; i++) {
+            if (sh.items[i].name === MASTER_TAG) {
+              sh.items[i].name = 'Picture ' + i;
+            }
           }
         }
+        await context.sync();
 
-        if (!found) {
-          showStatus('error', '❌ No image found on the current slide. Make sure your slide has an image and try again.');
-        }
+        // Tag this shape as master
+        const originalName = picShape.name;
+        picShape.name = MASTER_TAG;
+        masterShapeName = MASTER_TAG;
+        await context.sync();
+
+        document.getElementById('masterInfo').style.display = 'block';
+        document.getElementById('masterShapeName').textContent = originalName;
+        document.getElementById('masterSlideNum').textContent = 'Slide ' + (targetSlideIndex + 1);
+        showStatus('success', `✅ Master image tagged on Slide ${targetSlideIndex + 1}! Now choose a replacement image in Step 2.`);
+        checkEnableReplace();
       });
 
     } catch (e) {
@@ -369,25 +194,21 @@
   function handleNewImage(event) {
     const file = event.target.files[0];
     if (!file) return;
-
     const reader = new FileReader();
     reader.onload = function(e) {
       const dataUrl = e.target.result;
-      newImageBase64 = dataUrl.split(',')[1]; // strip the data:...;base64, prefix
-
-      // Show preview
+      newImageBase64 = dataUrl.split(',')[1];
       document.getElementById('newPreviewBox').style.display = 'block';
       document.getElementById('newPreviewImg').src = dataUrl;
       document.getElementById('newPreviewLabel').textContent = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
-
       checkEnableReplace();
     };
     reader.readAsDataURL(file);
   }
 
-  // STEP 3: Replace all matching images
+  // STEP 3: Replace all tagged images
   async function replaceAllImages() {
-    if (!masterImageBase64 || !newImageBase64) {
+    if (!masterShapeName || !newImageBase64) {
       showStatus('warning', '⚠️ Please complete Steps 1 and 2 first.');
       return;
     }
@@ -412,70 +233,55 @@
           await context.sync();
 
           for (let sh = 0; sh < shapes.items.length; sh++) {
-            shapes.items[sh].load("shapeType");
+            shapes.items[sh].load("shapeType,name,left,top,width,height");
           }
           await context.sync();
 
           for (let sh = 0; sh < shapes.items.length; sh++) {
             const shape = shapes.items[sh];
             if (shape.shapeType !== PowerPoint.ShapeType.picture) continue;
+            if (shape.name !== MASTER_TAG) continue;
 
-            try {
-              const imgEl = shape.image;
-              imgEl.load("base64");
-              await context.sync();
+            // Save position
+            const left = shape.left;
+            const top = shape.top;
+            const width = shape.width;
+            const height = shape.height;
 
-              // Compare base64 with master
-              if (imgEl.base64 === masterImageBase64) {
-                // Replace by deleting old and inserting new at same position
-                shape.load("left,top,width,height,name");
-                await context.sync();
+            // Delete old
+            shape.delete();
+            await context.sync();
 
-                const left = shape.left;
-                const top = shape.top;
-                const width = shape.width;
-                const height = shape.height;
+            // Insert new
+            slide.shapes.addImage(newImageBase64);
+            await context.sync();
 
-                // Delete old shape
-                shape.delete();
-                await context.sync();
+            // Reposition
+            const newShapes = slide.shapes;
+            newShapes.load("items");
+            await context.sync();
 
-                // Insert new image
-                slide.shapes.addImage(`data:image/jpeg;base64,${newImageBase64}`);
-                await context.sync();
+            const last = newShapes.items[newShapes.items.length - 1];
+            last.left = left;
+            last.top = top;
+            last.width = width;
+            last.height = height;
+            last.name = MASTER_TAG;
+            await context.sync();
 
-                // Position the newly added image
-                const newShapes = slide.shapes;
-                newShapes.load("items");
-                await context.sync();
-
-                const lastShape = newShapes.items[newShapes.items.length - 1];
-                lastShape.left = left;
-                lastShape.top = top;
-                lastShape.width = width;
-                lastShape.height = height;
-                await context.sync();
-
-                replaced++;
-              }
-            } catch(imgErr) {
-              // Not a replaceable image, skip
-            }
+            replaced++;
           }
 
-          // Update progress bar
           const pct = Math.round(((s + 1) / total) * 100);
           document.getElementById('progressFill').style.width = pct + '%';
         }
 
         if (replaced === 0) {
-          showStatus('warning', '⚠️ No matching images found. Make sure you tagged the correct image in Step 1.');
+          showStatus('warning', '⚠️ No tagged images found. Please redo Step 1 to tag your master image.');
         } else {
-          showStatus('success', `✅ Done! Replaced the master image on ${replaced} slide(s) across all ${total} slides.`);
+          showStatus('success', `✅ Done! Replaced image on ${replaced} slide(s) across all ${total} slides.`);
         }
-
         document.getElementById('btnReplace').disabled = false;
-        masterImageBase64 = newImageBase64; // Update master to new image for future replaces
       });
 
     } catch (e) {
@@ -485,23 +291,18 @@
   }
 
   function checkEnableReplace() {
-    const ready = masterImageBase64 && newImageBase64;
-    document.getElementById('btnReplace').disabled = !ready;
+    document.getElementById('btnReplace').disabled = !(masterShapeName && newImageBase64);
   }
 
   function resetAll() {
-    masterImageBase64 = null;
     newImageBase64 = null;
-    masterSlideIndex = null;
-    masterShapeIndex = null;
-
+    masterShapeName = null;
     document.getElementById('masterInfo').style.display = 'none';
     document.getElementById('newPreviewBox').style.display = 'none';
     document.getElementById('newImageFile').value = '';
     document.getElementById('btnReplace').disabled = true;
     document.getElementById('progressBar').style.display = 'none';
     document.getElementById('progressFill').style.width = '0%';
-
     showStatus('info', '🔄 Reset complete. Start fresh from Step 1.');
   }
 
