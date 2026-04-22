@@ -299,78 +299,65 @@
       showStatus('info', '🔍 Reading selected image...');
 
       await PowerPoint.run(async (context) => {
-        const slide = context.presentation.getSelectedSlides().getItemAt(0);
-        const shapes = slide.shapes;
-        shapes.load("items");
-        await context.sync();
-
-        // Find selected shape
-        let foundImage = null;
-        let foundIndex = -1;
-
-        for (let i = 0; i < shapes.items.length; i++) {
-          const shape = shapes.items[i];
-          shape.load("shapeType,name");
-        }
-        await context.sync();
-
-        // Get the selected shape
-        const selected = context.presentation.getSelectedShapes();
-        selected.load("items");
-        await context.sync();
-
-        if (selected.items.length === 0) {
-          showStatus('error', '❌ No image selected. Please click on an image in your slide first.');
-          return;
-        }
-
-        const selShape = selected.items[0];
-        selShape.load("shapeType,name,id");
-        await context.sync();
-
-        if (selShape.shapeType !== PowerPoint.ShapeType.picture) {
-          showStatus('error', '❌ Selected item is not an image. Please click on a photo/image.');
-          return;
-        }
-
-        // Get slide info
         const slides = context.presentation.slides;
         slides.load("items");
         await context.sync();
 
+        // Try to get active slide ID
+        let activeSlideId = null;
+        try {
+          const selSlides = context.presentation.getSelectedSlides();
+          selSlides.load("items");
+          await context.sync();
+          if (selSlides.items.length > 0) {
+            selSlides.items[0].load("id");
+            await context.sync();
+            activeSlideId = selSlides.items[0].id;
+          }
+        } catch(e) { /* fallback: scan all slides */ }
+
+        let found = false;
         for (let s = 0; s < slides.items.length; s++) {
           const sl = slides.items[s];
+          sl.load("id");
+          await context.sync();
+
+          if (activeSlideId && sl.id !== activeSlideId) continue;
+
           const sShapes = sl.shapes;
           sShapes.load("items");
           await context.sync();
 
           for (let sh = 0; sh < sShapes.items.length; sh++) {
-            sShapes.items[sh].load("id,shapeType");
+            sShapes.items[sh].load("shapeType,name");
           }
           await context.sync();
 
           for (let sh = 0; sh < sShapes.items.length; sh++) {
-            if (sShapes.items[sh].id === selShape.id) {
-              masterSlideIndex = s;
-              masterShapeIndex = sh;
-
-              // Get image as base64
-              const imgEl = sShapes.items[sh].image;
-              imgEl.load("base64,format");
+            const shape = sShapes.items[sh];
+            if (shape.shapeType !== PowerPoint.ShapeType.picture) continue;
+            try {
+              const imgEl = shape.image;
+              imgEl.load("base64");
               await context.sync();
-
-              masterImageBase64 = imgEl.base64;
-
-              document.getElementById('masterInfo').style.display = 'block';
-              document.getElementById('masterSlideNum').textContent = `Slide ${s + 1}`;
-              showStatus('success', `✅ Master image tagged from Slide ${s + 1}!`);
-              checkEnableReplace();
-              return;
-            }
+              if (imgEl.base64) {
+                masterImageBase64 = imgEl.base64;
+                masterSlideIndex = s;
+                masterShapeIndex = sh;
+                document.getElementById('masterInfo').style.display = 'block';
+                document.getElementById('masterSlideNum').textContent = `Slide ${s + 1} — "${shape.name}"`;
+                showStatus('success', `✅ Master image tagged from Slide ${s + 1}! Now choose a replacement image.`);
+                checkEnableReplace();
+                found = true;
+                return;
+              }
+            } catch(imgErr) { continue; }
           }
         }
 
-        showStatus('error', '❌ Could not find the selected image. Try clicking on it again.');
+        if (!found) {
+          showStatus('error', '❌ No image found on the current slide. Make sure your slide has an image and try again.');
+        }
       });
 
     } catch (e) {
