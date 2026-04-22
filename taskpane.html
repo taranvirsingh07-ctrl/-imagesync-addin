@@ -368,18 +368,14 @@
             shape.delete();
             await context.sync();
 
-            slide.shapes.addImage(newImageBase64);
+            slide.shapes.addPictureBase64(newImageBase64, { left: left, top: top, width: width, height: height });
             await context.sync();
 
+            // Tag the newly added image
             const newShapes = slide.shapes;
             newShapes.load("items");
             await context.sync();
-
             const last = newShapes.items[newShapes.items.length - 1];
-            last.left = left;
-            last.top = top;
-            last.width = width;
-            last.height = height;
             last.name = MASTER_TAG;
             await context.sync();
 
