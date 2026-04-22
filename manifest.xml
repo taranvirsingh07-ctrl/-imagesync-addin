@@ -22,12 +22,13 @@
     <AppDomain>https://taranvirsingh07-ctrl.github.io</AppDomain>
   </AppDomains>
 
+
   <Hosts>
     <Host Name="Presentation"/>
   </Hosts>
 
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://taranvirsingh07-ctrl.github.io/imagesync-addin/taskpane.html"/>
+    <SourceLocation DefaultValue="https://taranvirsingh07-ctrl.github.io/-imagesync-addin/taskpane.html"/>
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
@@ -84,8 +85,8 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
-        <bt:Url id="Commands.Url" DefaultValue="https://taranvirsingh07-ctrl.github.io/imagesync-addin/taskpane.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://taranvirsingh07-ctrl.github.io/imagesync-addin/taskpane.html"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://taranvirsingh07-ctrl.github.io/-imagesync-addin/taskpane.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://taranvirsingh07-ctrl.github.io/-imagesync-addin/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GetStarted.Title" DefaultValue="Get started with ImageSync!"/>
