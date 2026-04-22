@@ -16,51 +16,66 @@
     .step-badge { background: #6366f1; color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
     .btn { width: 100%; padding: 11px 16px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .btn-primary { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-success { background: linear-gradient(135deg, #10b981, #059669); color: white; }
-    .btn-success:hover { opacity: 0.9; transform: translateY(-1px); }
-    .btn-success:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-success:hover { opacity: 0.9; }
+    .btn-success:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
-    .btn-danger:hover { opacity: 0.9; }
+    .btn-sm { width: auto; padding: 6px 12px; font-size: 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    .btn-tag { background: #6366f1; color: white; }
+    .btn-tag:hover { background: #4f46e5; }
     .file-input-wrapper { position: relative; margin-top: 10px; }
     .file-input-wrapper input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .file-label { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px; border: 2px dashed #c4b5fd; border-radius: 8px; background: #f5f3ff; color: #6366f1; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .file-label:hover { background: #ede9fe; border-color: #8b5cf6; }
+    .file-label { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px; border: 2px dashed #c4b5fd; border-radius: 8px; background: #f5f3ff; color: #6366f1; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .file-label:hover { background: #ede9fe; }
     .preview-box { margin-top: 10px; border-radius: 8px; overflow: hidden; border: 2px solid #e5e7eb; display: none; }
-    .preview-box img { width: 100%; height: 120px; object-fit: contain; background: #f9fafb; }
+    .preview-box img { width: 100%; height: 100px; object-fit: contain; background: #f9fafb; }
     .preview-label { padding: 6px 10px; font-size: 11px; color: #6b7280; background: #f3f4f6; text-align: center; }
     .status-box { border-radius: 8px; padding: 12px; font-size: 13px; margin-top: 10px; display: none; line-height: 1.5; }
     .status-box.info { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
     .status-box.success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
     .status-box.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
     .status-box.warning { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
-    .master-info { display: none; background: #f5f3ff; border: 1px solid #c4b5fd; border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 12px; color: #5b21b6; }
-    .master-info strong { display: block; margin-bottom: 4px; }
     .progress-bar { height: 6px; background: #e5e7eb; border-radius: 99px; overflow: hidden; margin-top: 10px; display: none; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 99px; transition: width 0.3s ease; width: 0%; }
     .tip { font-size: 11px; color: #9ca3af; margin-top: 8px; line-height: 1.5; }
+
+    /* Shape list */
+    .shape-list { margin-top: 10px; display: none; }
+    .shape-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 6px; background: #fafafa; transition: all 0.2s; }
+    .shape-item:hover { background: #f5f3ff; border-color: #c4b5fd; }
+    .shape-item.selected { background: #ede9fe; border-color: #6366f1; }
+    .shape-info { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+    .shape-name { font-size: 13px; font-weight: 600; color: #1f2937; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .shape-meta { font-size: 11px; color: #9ca3af; }
+    .shape-icon { font-size: 18px; margin-right: 8px; flex-shrink: 0; }
+    .master-badge { display: none; font-size: 10px; background: #6366f1; color: white; padding: 2px 6px; border-radius: 99px; margin-top: 2px; width: fit-content; }
   </style>
 </head>
 <body>
 
   <div class="header">
     <h1>🔁 ImageSync</h1>
-    <p>Replace one image → update all slides instantly</p>
+    <p>Replace one shape → update all slides instantly</p>
   </div>
 
+  <!-- STEP 1 -->
   <div class="card">
-    <h2><span class="step-badge">1</span> Tag Master Image</h2>
-    <p style="font-size:12px; color:#6b7280; margin-bottom:10px;">Click on your image in the slide, then press the button below.</p>
-    <button class="btn btn-primary" id="btnTag" onclick="tagSelectedImage()">🏷️ Tag Selected Image as Master</button>
-    <div class="master-info" id="masterInfo">
-      <strong>✅ Master image tagged!</strong>
-      Shape: <span id="masterShapeName">—</span><br/>
-      Slide: <span id="masterSlideNum">—</span>
+    <h2><span class="step-badge">1</span> Scan & Tag Master Shape</h2>
+    <p style="font-size:12px; color:#6b7280; margin-bottom:10px;">Scan the current slide to see all shapes, then tag the one you want to replace everywhere.</p>
+    <button class="btn btn-primary" id="btnScan" onclick="scanSlide()">🔍 Scan Current Slide</button>
+
+    <div class="shape-list" id="shapeList"></div>
+
+    <div id="masterConfirm" style="display:none; margin-top:10px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:10px; font-size:12px; color:#166534;">
+      <strong>✅ Master shape tagged!</strong><br/>
+      <span id="masterConfirmText">—</span>
     </div>
-    <p class="tip">💡 Click on your image in the slide first, then press the button.</p>
+    <p class="tip">💡 Navigate to the slide with your target image first, then click Scan.</p>
   </div>
 
+  <!-- STEP 2 -->
   <div class="card">
     <h2><span class="step-badge">2</span> Choose Replacement Image</h2>
     <div class="file-input-wrapper">
@@ -73,6 +88,7 @@
     </div>
   </div>
 
+  <!-- STEP 3 -->
   <div class="card">
     <h2><span class="step-badge">3</span> Replace Across All Slides</h2>
     <button class="btn btn-success" id="btnReplace" onclick="replaceAllImages()" disabled>🔄 Replace on All Slides</button>
@@ -82,35 +98,67 @@
     <div class="status-box" id="statusBox"></div>
   </div>
 
+  <!-- Reset -->
   <div class="card">
     <h2>⚙️ Options</h2>
     <button class="btn btn-danger" onclick="resetAll()">🗑️ Reset / Start Over</button>
-    <p class="tip">Clears all tagged images and selections so you can start fresh.</p>
+    <p class="tip">Clears all tagged shapes and selections.</p>
   </div>
 
 <script>
   const MASTER_TAG = '__imagesync_master__';
   let newImageBase64 = null;
-  let masterShapeName = null;
+  let masterShapeTagged = false;
+  let scannedShapes = [];
+
+  const SHAPE_ICONS = {
+    'picture': '🖼️',
+    'textBox': '📝',
+    'rectangle': '⬛',
+    'roundedRectangle': '▪️',
+    'oval': '⭕',
+    'triangle': '🔺',
+    'line': '📏',
+    'table': '📊',
+    'chart': '📈',
+    'smartArt': '🔷',
+    'video': '🎬',
+    'audio': '🔊',
+    'group': '📦',
+    'unknown': '🔷'
+  };
+
+  function getShapeIcon(type) {
+    for (const key in SHAPE_ICONS) {
+      if (type && type.toLowerCase().includes(key.toLowerCase())) return SHAPE_ICONS[key];
+    }
+    return '🔷';
+  }
 
   Office.onReady(function(info) {
     if (info.host === Office.HostType.PowerPoint) {
-      showStatus('info', '✅ Add-in ready! Click an image on your slide, then tag it as master.');
+      showStatus('info', '✅ Add-in ready! Click "Scan Current Slide" to see all shapes.');
     }
   });
 
-  // STEP 1: Tag selected image by renaming it
-  async function tagSelectedImage() {
+  // STEP 1: Scan slide for all shapes
+  async function scanSlide() {
     try {
-      showStatus('info', '🔍 Tagging selected image...');
+      document.getElementById('shapeList').style.display = 'none';
+      document.getElementById('shapeList').innerHTML = '';
+      document.getElementById('masterConfirm').style.display = 'none';
+      masterShapeTagged = false;
+      scannedShapes = [];
+      checkEnableReplace();
+
+      showStatus('info', '🔍 Scanning slide for all shapes...');
 
       await PowerPoint.run(async (context) => {
-        // Load all slides
         const slides = context.presentation.slides;
         slides.load("items");
         await context.sync();
 
-        // Try to find currently selected slide
+        // Get active slide
         let targetSlideIndex = 0;
         try {
           const selSlides = context.presentation.getSelectedSlides();
@@ -136,25 +184,73 @@
         await context.sync();
 
         for (let sh = 0; sh < shapes.items.length; sh++) {
-          shapes.items[sh].load("shapeType,name");
+          shapes.items[sh].load("name,shapeType,width,height,left,top");
         }
         await context.sync();
 
-        // Find first picture shape
-        let picShape = null;
-        for (let sh = 0; sh < shapes.items.length; sh++) {
-          if (shapes.items[sh].shapeType === PowerPoint.ShapeType.picture) {
-            picShape = shapes.items[sh];
-            break;
-          }
-        }
-
-        if (!picShape) {
-          showStatus('error', '❌ No image found on this slide. Please go to a slide that has an image.');
+        if (shapes.items.length === 0) {
+          showStatus('warning', '⚠️ No shapes found on this slide.');
           return;
         }
 
-        // Remove old master tags from all slides first
+        scannedShapes = [];
+        for (let sh = 0; sh < shapes.items.length; sh++) {
+          const s = shapes.items[sh];
+          scannedShapes.push({
+            name: s.name,
+            shapeType: s.shapeType ? s.shapeType.toString() : 'unknown',
+            width: Math.round(s.width),
+            height: Math.round(s.height),
+            slideIndex: targetSlideIndex
+          });
+        }
+
+        renderShapeList(targetSlideIndex + 1);
+        showStatus('success', `✅ Found ${scannedShapes.length} shape(s) on Slide ${targetSlideIndex + 1}. Click "Tag as Master" on the one you want to replace everywhere.`);
+      });
+
+    } catch(e) {
+      showStatus('error', '❌ Error: ' + e.message);
+    }
+  }
+
+  function renderShapeList(slideNum) {
+    const list = document.getElementById('shapeList');
+    list.innerHTML = `<p style="font-size:11px;color:#6b7280;margin-bottom:8px;">📋 Shapes on Slide ${slideNum}:</p>`;
+
+    scannedShapes.forEach((shape, idx) => {
+      const icon = getShapeIcon(shape.shapeType);
+      const isMaster = shape.name === MASTER_TAG;
+      const div = document.createElement('div');
+      div.className = 'shape-item' + (isMaster ? ' selected' : '');
+      div.id = 'shape-item-' + idx;
+      div.innerHTML = `
+        <span class="shape-icon">${icon}</span>
+        <div class="shape-info">
+          <span class="shape-name">${isMaster ? '⭐ MASTER' : shape.name}</span>
+          <span class="shape-meta">${shape.shapeType} · ${shape.width}×${shape.height}px</span>
+          <span class="master-badge" id="badge-${idx}" style="${isMaster ? 'display:block' : 'display:none'}">Master</span>
+        </div>
+        <button class="btn-sm btn-tag" onclick="tagShape(${idx})">${isMaster ? '✅ Tagged' : 'Tag as Master'}</button>
+      `;
+      list.appendChild(div);
+    });
+
+    list.style.display = 'block';
+  }
+
+  // Tag a specific shape as master
+  async function tagShape(idx) {
+    const shape = scannedShapes[idx];
+    try {
+      showStatus('info', `🏷️ Tagging "${shape.name}" as master...`);
+
+      await PowerPoint.run(async (context) => {
+        const slides = context.presentation.slides;
+        slides.load("items");
+        await context.sync();
+
+        // Remove old master tags from ALL slides
         for (let s = 0; s < slides.items.length; s++) {
           const sl = slides.items[s];
           const sh = sl.shapes;
@@ -166,26 +262,49 @@
           await context.sync();
           for (let i = 0; i < sh.items.length; i++) {
             if (sh.items[i].name === MASTER_TAG) {
-              sh.items[i].name = 'Picture ' + i;
+              sh.items[i].name = 'Picture_' + s + '_' + i;
             }
           }
         }
         await context.sync();
 
-        // Tag this shape as master
-        const originalName = picShape.name;
-        picShape.name = MASTER_TAG;
-        masterShapeName = MASTER_TAG;
+        // Tag the selected shape on the scanned slide
+        const slide = slides.items[shape.slideIndex];
+        const shapes = slide.shapes;
+        shapes.load("items");
         await context.sync();
 
-        document.getElementById('masterInfo').style.display = 'block';
-        document.getElementById('masterShapeName').textContent = originalName;
-        document.getElementById('masterSlideNum').textContent = 'Slide ' + (targetSlideIndex + 1);
-        showStatus('success', `✅ Master image tagged on Slide ${targetSlideIndex + 1}! Now choose a replacement image in Step 2.`);
-        checkEnableReplace();
+        for (let i = 0; i < shapes.items.length; i++) {
+          shapes.items[i].load("name");
+        }
+        await context.sync();
+
+        let tagged = false;
+        for (let i = 0; i < shapes.items.length; i++) {
+          if (shapes.items[i].name === shape.name) {
+            shapes.items[i].name = MASTER_TAG;
+            tagged = true;
+            break;
+          }
+        }
+        await context.sync();
+
+        if (tagged) {
+          masterShapeTagged = true;
+          // Update local scanned name
+          scannedShapes[idx].name = MASTER_TAG;
+          renderShapeList(shape.slideIndex + 1);
+
+          document.getElementById('masterConfirm').style.display = 'block';
+          document.getElementById('masterConfirmText').textContent = `Shape "${shape.name}" on Slide ${shape.slideIndex + 1} is now the master. It will be replaced across all slides.`;
+          showStatus('success', `✅ Master tagged! Now choose a replacement image in Step 2.`);
+          checkEnableReplace();
+        } else {
+          showStatus('error', `❌ Could not find shape "${shape.name}". Try scanning again.`);
+        }
       });
 
-    } catch (e) {
+    } catch(e) {
       showStatus('error', '❌ Error: ' + e.message);
     }
   }
@@ -206,16 +325,16 @@
     reader.readAsDataURL(file);
   }
 
-  // STEP 3: Replace all tagged images
+  // STEP 3: Replace all tagged shapes
   async function replaceAllImages() {
-    if (!masterShapeName || !newImageBase64) {
+    if (!masterShapeTagged || !newImageBase64) {
       showStatus('warning', '⚠️ Please complete Steps 1 and 2 first.');
       return;
     }
 
     document.getElementById('btnReplace').disabled = true;
     document.getElementById('progressBar').style.display = 'block';
-    showStatus('info', '🔄 Replacing images across all slides...');
+    showStatus('info', '🔄 Replacing across all slides...');
 
     try {
       await PowerPoint.run(async (context) => {
@@ -233,30 +352,25 @@
           await context.sync();
 
           for (let sh = 0; sh < shapes.items.length; sh++) {
-            shapes.items[sh].load("shapeType,name,left,top,width,height");
+            shapes.items[sh].load("name,shapeType,left,top,width,height");
           }
           await context.sync();
 
           for (let sh = 0; sh < shapes.items.length; sh++) {
             const shape = shapes.items[sh];
-            if (shape.shapeType !== PowerPoint.ShapeType.picture) continue;
             if (shape.name !== MASTER_TAG) continue;
 
-            // Save position
             const left = shape.left;
             const top = shape.top;
             const width = shape.width;
             const height = shape.height;
 
-            // Delete old
             shape.delete();
             await context.sync();
 
-            // Insert new
             slide.shapes.addImage(newImageBase64);
             await context.sync();
 
-            // Reposition
             const newShapes = slide.shapes;
             newShapes.load("items");
             await context.sync();
@@ -277,27 +391,30 @@
         }
 
         if (replaced === 0) {
-          showStatus('warning', '⚠️ No tagged images found. Please redo Step 1 to tag your master image.');
+          showStatus('warning', '⚠️ No master-tagged shapes found. Please redo Step 1.');
         } else {
-          showStatus('success', `✅ Done! Replaced image on ${replaced} slide(s) across all ${total} slides.`);
+          showStatus('success', `✅ Done! Replaced on ${replaced} slide(s) across all ${total} slides.`);
         }
         document.getElementById('btnReplace').disabled = false;
       });
 
-    } catch (e) {
-      showStatus('error', '❌ Error during replacement: ' + e.message);
+    } catch(e) {
+      showStatus('error', '❌ Error: ' + e.message);
       document.getElementById('btnReplace').disabled = false;
     }
   }
 
   function checkEnableReplace() {
-    document.getElementById('btnReplace').disabled = !(masterShapeName && newImageBase64);
+    document.getElementById('btnReplace').disabled = !(masterShapeTagged && newImageBase64);
   }
 
   function resetAll() {
     newImageBase64 = null;
-    masterShapeName = null;
-    document.getElementById('masterInfo').style.display = 'none';
+    masterShapeTagged = false;
+    scannedShapes = [];
+    document.getElementById('shapeList').style.display = 'none';
+    document.getElementById('shapeList').innerHTML = '';
+    document.getElementById('masterConfirm').style.display = 'none';
     document.getElementById('newPreviewBox').style.display = 'none';
     document.getElementById('newImageFile').value = '';
     document.getElementById('btnReplace').disabled = true;
